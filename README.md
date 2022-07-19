@@ -1,4 +1,18 @@
 # Gaussian Background Generator (Version 0.5.1)
+
+> ## Note
+> 
+> This fork is aiming to publish the project to npm. So you can install with:
+> 
+> ```shell
+> npm install gaussian-background-generator
+> ```
+> 
+> Also benefit:
+> 
+> 1. ESM
+> 2. TypeScript
+
 A script which creates a gaussian blur effect background using a canvas element. The effect is similar to that seen in various gaussian background images, however, this script generates the effect dynamically and includes a pleasant animation.
 
 Script example (http://projects.foxx.io/gaussian/).
