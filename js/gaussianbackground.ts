@@ -1,20 +1,24 @@
-/** 
- * Gaussian Background Generator 
- * 
+// @ts-nocheck
+/**
+ * Gaussian Background Generator
+ *
  * @version    0.5.1
  * @author     Aiden Foxx
- * @license    MIT License 
+ * @license    MIT License
  * @copyright  2015 Aiden Foxx
  * @link       http://github.com/aidenfoxx
  * @twitter    @furiousfoxx
- */ 
+ */
 
-'use strict';
+import {stackBlurCanvasRGB} from './vendor/stackblur';
+import {boxBlurCanvasRGB} from './vendor/fastblur';
+import {integralBlurCanvasRGB} from './vendor/integralblur';
+import {stackBoxBlurCanvasRGB} from './vendor/stackboxblur';
 
 /**
  * @constructor
  */
-function GaussianBackground(element, layers, options)
+export function GaussianBackground(element, layers, options)
 {
     if (!(this instanceof GaussianBackground))
         return new GaussianBackground(element, layers, options);
@@ -110,7 +114,7 @@ GaussianBackground.prototype.generateLayer = function(orbs, radius, maxVelocity,
             posX: (Math.random() * maxX) + minX,
             posY:  (Math.random() * maxY) + minY,
             // Give is a random velocity to make the animation a bit more interesting
-            velX: Math.round(Math.random()) ? Math.random() * maxVelocity : -(Math.random() * maxVelocity), 
+            velX: Math.round(Math.random()) ? Math.random() * maxVelocity : -(Math.random() * maxVelocity),
             velY: Math.round(Math.random()) ? Math.random() * maxVelocity : -(Math.random() * maxVelocity),
             // Custom boundaries can be used to create more consistent backgrounds
             minX: minX,
@@ -172,7 +176,7 @@ GaussianBackground.prototype.drawBackground = function()
                 layerOrbs[x].posX = layerOrbs[x].minX;
                 layerOrbs[x].velX = -layerOrbs[x].velX;
             }
-            
+
             if (layerOrbs[x].posY >= layerOrbs[x].maxY)
             {
                 layerOrbs[x].posY = layerOrbs[x].maxY;
@@ -183,7 +187,7 @@ GaussianBackground.prototype.drawBackground = function()
                 layerOrbs[x].posY = layerOrbs[x].minY;
                 layerOrbs[x].velY = -layerOrbs[x].velY;
             }
-  
+
             layerContext.save();
             layerContext.globalCompositeOperation = 'destination-out';
             layerContext.beginPath();
