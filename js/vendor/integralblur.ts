@@ -286,6 +286,8 @@ function getCanvasPixels( canvasID, top_x, top_y, width, height )
 
 function calculateIntegralImageRGB( pixels, width, height )
 {
+
+	var rsum,gsum,bsum,asum,x,y;
 	var r = [];
     var g = [];
     var b = [];
@@ -334,7 +336,7 @@ function calculateIntegralImageRGB( pixels, width, height )
 
 function calculateIntegralImageRGBA( pixels, width, height )
 {
-
+	var rsum,gsum,bsum,asum,x,y;
 	var r = [];
     var g = [];
     var b = [];
