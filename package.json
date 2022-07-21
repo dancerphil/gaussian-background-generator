@@ -1,6 +1,6 @@
 {
   "name": "gaussian-background-generator",
-  "version": "0.0.1-alpha",
+  "version": "0.0.1-alpha.1",
   "description": "Creates a gaussian blur effect background using a canvas element.",
   "license": "MIT",
   "main": "es/index.js",
