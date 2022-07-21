@@ -38,14 +38,10 @@ FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
 */
 
-function integralBlurImage( imageID, canvasID, radius, blurAlphaChannel, iterations )
+export function integralBlurImage( img, canvas, radius, blurAlphaChannel, iterations )
 {
-
-	var img = document.getElementById( imageID );
 	var w = img.naturalWidth;
     var h = img.naturalHeight;
-
-	var canvas = document.getElementById( canvasID );
 
     canvas.style.width  = w + "px";
     canvas.style.height = h + "px";
@@ -66,10 +62,10 @@ function integralBlurImage( imageID, canvasID, radius, blurAlphaChannel, iterati
 	}
 }
 
-export function integralBlurCanvasRGB( id, top_x, top_y, width, height, radius, iterations )
+export function integralBlurCanvasRGB( canvas, top_x, top_y, width, height, radius, iterations )
 {
 
-	var ii = integralImageFromCanvasRGB( id, 0, 0, width, height );
+	var ii = integralImageFromCanvasRGB( canvas, 0, 0, width, height );
 	if ( ii == null ) return;
 	var imageData = ii.imageData;
 	var pixels    = imageData.pixels;
@@ -89,10 +85,10 @@ export function integralBlurCanvasRGB( id, top_x, top_y, width, height, radius, 
 }
 
 
-function integralBlurCanvasRGBA( id, top_x, top_y, width, height, radius, iterations )
+export function integralBlurCanvasRGBA( canvas, top_x, top_y, width, height, radius, iterations )
 {
 
-	var ii = integralImageFromCanvasRGBA( id, 0, 0, width, height );
+	var ii = integralImageFromCanvasRGBA( canvas, 0, 0, width, height );
 	if ( ii == null ) return;
 	var imageData = ii.imageData;
 	var pixels    = ii.pixels;
@@ -220,14 +216,11 @@ function blurIntegralImageRGB( integralImage, radius )
 
 }
 
-function integralImageFromImage( imageID, canvasID, includeAlphaChannel )
+export function integralImageFromImage( img, canvas, includeAlphaChannel )
 {
 
- 	var img = document.getElementById( imageID );
 	var w = img.naturalWidth;
     var h = img.naturalHeight;
-
-	var canvas = document.getElementById( canvasID );
 
     canvas.style.width  = w + "px";
     canvas.style.height = h + "px";
@@ -240,15 +233,15 @@ function integralImageFromImage( imageID, canvasID, includeAlphaChannel )
 
 	if ( includeAlphaChannel )
 	{
-		return integralImageFromCanvasRGBA( canvasID, 0, 0, w, h );
+		return integralImageFromCanvasRGBA( canvas, 0, 0, w, h );
 	} else {
-		return integralImageFromCanvasRGB( canvasID, 0, 0, w, h );
+		return integralImageFromCanvasRGB( canvas, 0, 0, w, h );
 	}
 }
 
-function integralImageFromCanvasRGB( id, top_x, top_y, width, height )
+function integralImageFromCanvasRGB( canvas, top_x, top_y, width, height )
 {
-	var pixelData = getCanvasPixels( id, top_x, top_y, width, height );
+	var pixelData = getCanvasPixels( canvas, top_x, top_y, width, height );
 	if ( pixelData == null ) return;
 
 	var ii = calculateIntegralImageRGB( pixelData.pixels, width, height );
@@ -257,9 +250,9 @@ function integralImageFromCanvasRGB( id, top_x, top_y, width, height )
 	return ii;
 }
 
-function integralImageFromCanvasRGBA( id, top_x, top_y, width, height )
+export function integralImageFromCanvasRGBA( canvas, top_x, top_y, width, height )
 {
-	var pixelData = getCanvasPixels( id, top_x, top_y, width, height );
+	var pixelData = getCanvasPixels( canvas, top_x, top_y, width, height );
 	if ( pixelData == null ) return;
 
 	var ii = calculateIntegralImageRGBA( pixelData.pixels, width, height );
@@ -268,10 +261,10 @@ function integralImageFromCanvasRGBA( id, top_x, top_y, width, height )
 	return ii;
 }
 
-function getCanvasPixels( canvasID, top_x, top_y, width, height )
+function getCanvasPixels( canvas, top_x, top_y, width, height )
 {
-	var result = { id:canvasID, top_x:top_x, top_y:top_y, width:width, height:height };
-	result.canvas  = document.getElementById( canvasID );
+	var result = { top_x:top_x, top_y:top_y, width:width, height:height };
+	result.canvas  = canvas;
 	result.context = result.canvas.getContext("2d");
 
 	try {

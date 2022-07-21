@@ -49,14 +49,10 @@ var mul_table = [ 1,171,205,293,57,373,79,137,241,27,391,357,41,19,283,265,497,4
 var shg_table = [0,9,10,11,9,12,10,11,12,9,13,13,10,9,13,13,14,14,14,14,10,13,14,14,14,13,13,13,9,14,14,14,15,14,15,14,15,15,14,15,15,15,14,15,15,15,15,15,14,15,15,15,15,15,15,12,14,15,15,13,15,15,15,15,16,16,16,15,16,14,16,16,14,16,13,16,16,16,15,16,13,16,15,16,14,9,16,16,16,16,16,16,16,16,16,13,14,16,16,15,16,16,10,16,15,16,14,16,16,14,16,16,14,16,16,14,15,16,16,16,14,15,14,15,13,16,16,15,17,17,17,17,17,17,14,15,17,17,16,16,17,16,15,17,16,17,11,17,16,17,16,17,16,17,17,16,17,17,16,17,17,16,16,17,17,17,16,14,17,17,17,17,15,16,14,16,15,16,13,16,15,16,14,16,15,16,12,16,15,16,17,17,17,17,17,13,16,15,17,17,17,16,15,17,17,17,16,15,17,17,14,16,17,17,16,17,17,16,15,17,16,14,17,16,15,17,16,17,17,16,17,15,16,17,14,17,16,15,17,16,17,13,17,16,17,17,16,17,14,17,16,17,16,17,16,17,9
 ];
 
-function stackBoxBlurImage( imageID, canvasID, radius, blurAlphaChannel, iterations )
+export function stackBoxBlurImage( img, canvas, radius, blurAlphaChannel, iterations )
 {
-
-    var img = document.getElementById( imageID );
     var w = img.naturalWidth;
     var h = img.naturalHeight;
-
-    var canvas = document.getElementById( canvasID );
 
     canvas.style.width  = w + "px";
     canvas.style.height = h + "px";
@@ -70,13 +66,13 @@ function stackBoxBlurImage( imageID, canvasID, radius, blurAlphaChannel, iterati
     if ( isNaN(radius) || radius < 1 ) return;
 
     if ( blurAlphaChannel )
-        stackBoxBlurCanvasRGBA( canvasID, 0, 0, w, h, radius, iterations );
+        stackBoxBlurCanvasRGBA( canvas, 0, 0, w, h, radius, iterations );
     else
-        stackBoxBlurCanvasRGB( canvasID, 0, 0, w, h, radius, iterations );
+        stackBoxBlurCanvasRGB( canvas, 0, 0, w, h, radius, iterations );
 }
 
 
-function stackBoxBlurCanvasRGBA( id, top_x, top_y, width, height, radius, iterations )
+export function stackBoxBlurCanvasRGBA( canvas, top_x, top_y, width, height, radius, iterations )
 {
     if ( isNaN(radius) || radius < 1 ) return;
     radius |= 0;
@@ -86,7 +82,6 @@ function stackBoxBlurCanvasRGBA( id, top_x, top_y, width, height, radius, iterat
     if ( iterations > 3 ) iterations = 3;
     if ( iterations < 1 ) iterations = 1;
 
-    var canvas  = document.getElementById( id );
     var context = canvas.getContext("2d");
     var imageData;
 
@@ -266,7 +261,7 @@ function stackBoxBlurCanvasRGBA( id, top_x, top_y, width, height, radius, iterat
 }
 
 
-export function stackBoxBlurCanvasRGB( id, top_x, top_y, width, height, radius, iterations )
+export function stackBoxBlurCanvasRGB( canvas, top_x, top_y, width, height, radius, iterations )
 {
     if ( isNaN(radius) || radius < 1 ) return;
     radius |= 0;
@@ -276,7 +271,6 @@ export function stackBoxBlurCanvasRGB( id, top_x, top_y, width, height, radius, 
     if ( iterations > 3 ) iterations = 3;
     if ( iterations < 1 ) iterations = 1;
 
-    var canvas  = document.getElementById( id );
     var context = canvas.getContext("2d");
     var imageData;
 

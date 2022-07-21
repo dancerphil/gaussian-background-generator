@@ -206,19 +206,19 @@ GaussianBackground.prototype.drawBlur = function()
     switch (this.options.blurMethod)
     {
         case 'stackblur':
-            stackBlurCanvasRGB(this.context.canvas.id, 0, 0, this.options.renderWidth, this.options.renderHeight, this.options.blurRadius);
+            stackBlurCanvasRGB(this.context.canvas, 0, 0, this.options.renderWidth, this.options.renderHeight, this.options.blurRadius);
             break;
 
         case 'fastblur':
-            boxBlurCanvasRGB(this.context.canvas.id, 0, 0, this.options.renderWidth, this.options.renderHeight, this.options.blurRadius, this.options.blurIterations);
+            boxBlurCanvasRGB(this.context.canvas, 0, 0, this.options.renderWidth, this.options.renderHeight, this.options.blurRadius, this.options.blurIterations);
             break;
 
         case 'integralblur':
-            integralBlurCanvasRGB(this.context.canvas.id, 0, 0, this.options.renderWidth, this.options.renderHeight, this.options.blurRadius, this.options.blurIterations);
+            integralBlurCanvasRGB(this.context.canvas, 0, 0, this.options.renderWidth, this.options.renderHeight, this.options.blurRadius, this.options.blurIterations);
             break;
 
         case 'stackboxblur':
-            stackBoxBlurCanvasRGB(this.context.canvas.id, 0, 0, this.options.renderWidth, this.options.renderHeight, this.options.blurRadius, this.options.blurIterations);
+            stackBoxBlurCanvasRGB(this.context.canvas, 0, 0, this.options.renderWidth, this.options.renderHeight, this.options.blurRadius, this.options.blurIterations);
             break;
     }
 }
